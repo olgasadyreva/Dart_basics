@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_skillbox/delimeters_calculator.dart';
+import 'package:flutter_skillbox/conversion_number_system.dart';
+import 'package:flutter_skillbox/find_numbers.dart';
+import 'package:flutter_skillbox/create_map.dart';
+import 'package:flutter_skillbox/numbers_without _repetition.dart';
+import 'package:flutter_skillbox/point.dart';
+import 'package:flutter_skillbox/root_extraction.dart';
+import 'package:flutter_skillbox/user.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -7,40 +16,20 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo Flutter Skillbox',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Основы Dart'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -48,68 +37,104 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    DelitemersCalculator task1 = DelitemersCalculator();
+    ConversionNumberSystem task2 = ConversionNumberSystem();
+    FindNumbers task3 = FindNumbers();
+    CreateMap task4 = CreateMap();
+    NumbersWithoutRepetition task5 = NumbersWithoutRepetition();
+
+    var result1 = task1.getNOD(30, 18);
+    var result2 = task1.getNOK(18, 30);
+    var result3 = task1.primeFactors(200);
+    var result4 = task2.decimalToBin(145);
+    var result5 = task2.binToDecimal(10010001);
+    var result6 = task3.findNumbers('дом магазин 23 лес ручей 101 5 воробей -10');
+    var result7 = task4.createMap(['кошка', 'корова', 'лошадь', 'собака', 'кошка', 'корова', 'корова', 'кошка', 'собака', 'кошка', 'овца']);
+    var result8 = task5.createMap(['four', 'корова', 'лошадь', 'one', 'кошка', 'five', 'eight', 'кошка', 'one', 'кошка', 'five']);
+
+    final t = Point(5, 10, 8);
+    final another = Point(0, 0, 0);
+    var result9 = t.distanceTo(another);
+
+    double result10 = 0;
+    try {
+      print('try');
+      // print(42.findRootExtraction(570.15, 2));
+      result10 = 570.15.findRootExtraction(570.15, 2);
+
+    } catch (e) {
+      print('Невозможно извлечь корень. Ошибка: $e');
+    }
+
+    final admin = AdminUser('admin@gmail.com');
+
+    final user1 = UserManager().addUser('test1@gmail.com');
+    final user2 = UserManager().addUser('test2@gmail.com');
+    final user3 = UserManager().addUser('test3@gmail.com');
+    final user4 = UserManager().addUser('test4@gmail.com');
+    final user5 = UserManager().addUser('admin@gmail.com');
+
+
+    var result11 = admin.getMailSystem();
+    print(result11);
+
+    print(UserManager().getListEmail());
+
+
+
+
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              'Задание1. Вычисление НОД: $result1, вычисление НОК: $result2',
+              style: Theme.of(context).textTheme.headline6,
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              'Задание 1. Разбиение на простые множители: $result3',
+              style: Theme.of(context).textTheme.headline6,
             ),
+            Text(
+              'Задание 2. Из десятичной в двоичную: $result4',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Text(
+              'Задание 2. Из двоичной в десятичную: $result5',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Text(
+              'Задание 3. Нахождение в строке чисел: $result6',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Text(
+              'Задание 4. Повторяющиеся слова: $result7',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Text(
+              'Задание 5. Цифры без повторений: $result8',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Text(
+              'Задание 6. Расстояние между точками: $result9',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Text(
+              'Задание 7. Вычисление корня степени n: $result10',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
