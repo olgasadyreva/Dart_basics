@@ -26,7 +26,6 @@ class UserManager<T extends User> {
 
   addUser(email) {
     users.add(email);
-    print(users);
     return users;
   }
 
@@ -37,14 +36,13 @@ class UserManager<T extends User> {
 
   getListEmail() {
     users.forEach((user) => {
-      if(user == 'admin@gmail.com') {
-        users.add(user.getMailSystem()),
-        print(user.getMailSystem())
-      } else {
-        users.add(user.email),
-        print(user.email)
+      if (user.runtimeType == AdminUser) {
+        print('admin'),
+        user = user.getMailSystem(),
+        print(user)
       }
     });
+
     return users;
   }
 }

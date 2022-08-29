@@ -37,6 +37,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<dynamic> users = [];
 
   @override
   Widget build(BuildContext context) {
@@ -69,22 +70,19 @@ class _MyHomePageState extends State<MyHomePage> {
       print('Невозможно извлечь корень. Ошибка: $e');
     }
 
-    final admin = AdminUser('admin@gmail.com');
 
-    final user1 = UserManager().addUser('test1@gmail.com');
-    final user2 = UserManager().addUser('test2@gmail.com');
-    final user3 = UserManager().addUser('test3@gmail.com');
-    final user4 = UserManager().addUser('test4@gmail.com');
-    final user5 = UserManager().addUser('admin@gmail.com');
+      final admin = AdminUser('admin@gmail.com');
+      final user1 = User('test1@gmail.com');
+      final user2 = User('test2@gmail.com');
+      final user3 = User('test3@gmail.com');
+      var manager = UserManager();
 
+      manager.addUser(admin);
+      manager.addUser(user1);
+      manager.addUser(user2);
+      manager.addUser(user3);
 
-    var result11 = admin.getMailSystem();
-    print(result11);
-
-    print(UserManager().getListEmail());
-
-
-
+      users = manager.getListEmail();
 
     return Scaffold(
       appBar: AppBar(
@@ -131,10 +129,28 @@ class _MyHomePageState extends State<MyHomePage> {
               'Задание 7. Вычисление корня степени n: $result10',
               style: Theme.of(context).textTheme.headline6,
             ),
-
+            Text(
+              'Задание 8. Список пользователей:',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Container(
+              height: 600,
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.all(8),
+                  itemCount: users.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Text(users[index].email.toString(), style: TextStyle(fontSize: 16));
+                  }
+              ),
+            )
           ],
         ),
       ),
     );
   }
-}
+  }
+
+
+
