@@ -22,7 +22,7 @@ mixin UserMixin on User {
 }
 
 class UserManager<T extends User> {
-  var users = [];
+  List<User> users = [];
 
   addUser(email) {
     users.add(email);
@@ -35,14 +35,15 @@ class UserManager<T extends User> {
   }
 
   getListEmail() {
-    users.forEach((user) => {
+    List<String> result = [];
+    for (var user in users) {
       if (user.runtimeType == AdminUser) {
-        print('admin'),
-        user = user.getMailSystem(),
-        print(user)
+        result.add(AdminUser(user.email).getMailSystem());
+      } else {
+        result.add(user.email);
       }
-    });
-
-    return users;
+    }
+    print(result);
+    return result;
   }
 }

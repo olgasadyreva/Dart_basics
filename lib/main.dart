@@ -141,7 +141,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.all(8),
                   itemCount: users.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Text(users[index].email.toString(), style: TextStyle(fontSize: 16));
+                    return Text(
+                        users[index].toString(),
+                        style: const TextStyle(fontSize: 16));
                   }
               ),
             )
